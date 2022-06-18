@@ -49,7 +49,7 @@ MIDDLEWARE = [
 ]
 
 ALLOWED_HOSTS = [
-    "localhost",
+    "localhost","inventory-api",
 ]
 
 CSRF_TRUSTED_ORIGINS = [

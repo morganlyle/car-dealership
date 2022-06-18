@@ -60,10 +60,23 @@ def api_list_appointments(request):
         content = json.loads(request.body)
 
         try: 
-            vins = AutomobileVO.objects.get(vins)
-            vins = content['vin']
+            vin = AutomobileVO.objects.get(vin)
+            vin = content['vin']
         except AutomobileVO.DoesNotExist:
             return JsonResponse({"message": "Does not exist"}, status=400)
         
         appointment = Appointment.objects.create(**content)
         return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False,)
+    
+@require_http_methods(['GET', 'POST'])
+def api_list_technicians(request):
+    if request.method == "GET":
+        technicians = Technician.objects.all()
+        return JsonResponse(
+            {'technicians': technicians}, encoder=TechnicianListEncoder)
+    else:
+        content = json.loads(request.body)
+        try:
+            
+            technicians = Technician.objects.create(**content)
+            return JsonResponse(technicians, encoder=TechnicianListEncoder)
