@@ -10,7 +10,7 @@ from common.json import ModelEncoder
 from .models import Customer, SalesRep, SaleRecord, AutoMobileInventoryVO
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import SaleRepSerializer, SalesRecordSerializer, AutomobileVOSerializer
+from .serializers import SaleRepSerializer, SalesRecordSerializer, AutomobileVOSerializer, SaleMadeSerializer
 
 
 class CustomerListEncoder(ModelEncoder):
@@ -87,10 +87,29 @@ def api__list_salesrep(request):
             safe=False
         )
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "POST"])
 def api_salesmade(request):
     if request.method == "GET":
-        pass
+        sales_made = SaleRecord.objects.all()
+        response = SaleMadeSerializer(sales_made, many=True)
+        return JsonResponse(
+            {"sales": response.data}
+        )
+    else: 
+        if request.method == "POST":
+            content = json.loads(request.body)
+            automobileVO = AutoMobileInventoryVO.objects.get(vehicle_vin=content['automobile'])
+            content['automobile'] = automobileVO
+            sales_repVO = SalesRep.objects.get(employee_id=content['sales_rep'])
+            content['sales_rep'] = sales_repVO
+            customerVO = Customer.objects.get(id=content["customer"])
+            content['customer'] = customerVO
+            sale = SaleRecord.objects.create(**content)
+            sales_repVO.salesmade.add(sale)
+            response = SaleMadeSerializer(instance=sale)
+            return JsonResponse (response.data)
+
+            
 
 @require_http_methods(["GET"])
 def api_salesrep_detail(request, employee_id):
@@ -105,9 +124,9 @@ def api_salesrep_detail(request, employee_id):
 def api_automobileVO(request):
     if request.method == "GET":
         automobile = AutoMobileInventoryVO.objects.all()
-        print("THIS IS AUTOMOBILE OBJECT",automobile)
         serializer = AutomobileVOSerializer(automobile, many=True)
-        print("THIS IS THE SERIALIZER FOR AUTO : ", serializer.data)
         return JsonResponse(
             {"Cars": serializer.data}, 
             safe=False)
+
+

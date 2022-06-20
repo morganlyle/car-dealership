@@ -25,7 +25,7 @@ class Customer(models.Model):
 class SalesRep(models.Model):
     name = models.CharField(max_length=50)
     employee_id = models.PositiveIntegerField(null=False, blank=False, unique=True)
-    salesmade = models.ManyToManyField('SaleRecord', blank=True, null=True)
+    salesmade = models.ManyToManyField('SaleRecord', blank=True)
 
     def __str__(self):
         return f'{self.name} ID: {self.employee_id}'

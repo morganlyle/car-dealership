@@ -3,8 +3,10 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import CustomerForm from './CustomerForm';
 import SalesRepForm from './SalesRepForm';
-
-function App() {
+import SaleRecordForm from './SaleRecordForm';
+import SalesList from './SalesList';
+import SalesByReps from './SalesByReps';
+function App({customers, cars, salesReps, salesList}) {
   return (
     <BrowserRouter>
       <Nav />
@@ -18,6 +20,15 @@ function App() {
           </Route>
           <Route path="employee">
             <Route path="new" element={<SalesRepForm/>}/>
+          </Route>
+          <Route path="sales">
+            <Route path="" element={<SalesList salesList={salesList}/>}/>
+            <Route path="by-rep" element={<SalesByReps salesReps={salesReps}/>}/>
+            <Route path="create" element={<SaleRecordForm
+              customers={customers}
+              cars={cars}
+              salesReps={salesReps}
+            />}/>
           </Route>
         </Routes>
       </div>
