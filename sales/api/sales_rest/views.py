@@ -10,7 +10,7 @@ from common.json import ModelEncoder
 from .models import Customer, SalesRep, SaleRecord, AutoMobileInventoryVO
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import SaleRepSerializer, SalesRecordSerializer, AutomobileVOSerializer, SaleMadeSerializer
+from .serializers import SaleRepSerializer, AutomobileVOSerializer, SaleMadeSerializer
 
 
 class CustomerListEncoder(ModelEncoder):
