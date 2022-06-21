@@ -34,7 +34,7 @@ class SaleRepSerializer(serializers.ModelSerializer):
 class AutomobileVOSerializer(serializers.ModelSerializer):
     class Meta:
         model = AutoMobileInventoryVO
-        fields = ['vehicle_vin','model', 'manufacturer', 'sold', 'id']
+        fields = ['vehicle_vin','model', 'manufacturer', 'sold', 'id', 'color', 'year']
 
 class SaleMadeSerializer(serializers.ModelSerializer):
 

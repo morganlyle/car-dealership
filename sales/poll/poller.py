@@ -20,7 +20,9 @@ def get_automobiles():
             vehicle_vin = automobile['vin'],
             defaults = {
                 "model": automobile['model']['name'],
-                "manufacturer": automobile['model']['manufacturer']['name']
+                "manufacturer": automobile['model']['manufacturer']['name'],
+                "color": automobile['color'],
+                "year": automobile['year'],
             }
             
         )

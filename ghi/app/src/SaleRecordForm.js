@@ -33,7 +33,7 @@ export default function SaleRecordForm({customers, cars, salesReps}) {
         const response = await fetch(saleRecordUrl, fetchConfig);
         if (response.ok) {
             const newSale = await response.json();
-            console.log("Congrats on the new sale!", newSale)
+            console.log("response", newSale)
             setSaleData({automobile: "", sales_rep: "", customer: "", sale_price: ""})
         }
         
@@ -89,7 +89,7 @@ export default function SaleRecordForm({customers, cars, salesReps}) {
                             <input onChange={handleChange} value={saleDataForm.sale_price} placeholder="Vehicle Price $" type="number" name="sale_price" id="sale_price" className="form-control"/>
                         </div>
                         <div className="text-center">
-                        <button type="button" className="btn btn-primary">Submit Sale</button>
+                        <button className="btn btn-primary">Submit Sale</button>
                         </div>
                     </form>
                     </div>
