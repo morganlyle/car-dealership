@@ -35,42 +35,53 @@ function CustomerForm() {
   }
 
   return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <h3>Customer Form</h3>
-        </div>
-        <div>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            onChange={handleChange}
-            value={customer.name}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            onChange={handleChange}
-            value={customer.address}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="phone_number"
-            placeholder="Phone Number"
-            onChange={handleChange}
-            value={customer.phone_number}
-          />
-        </div>
-        <div>
-          <button>Submit Contact</button>
-        </div>
-      </form>
+    <div className="">
+          <div className="row">
+              <div className="offset-3 col-6">
+                  <div className="shadow p-4 mt-4">
+                    <form onSubmit={handleSubmit}>
+                      <div>
+                        <h3>Customer Form</h3>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="Name"
+                          className="form-control form-row mb-3"
+                          onChange={handleChange}
+                          value={customer.name}
+                        />
+                      </div>
+
+                      <div>
+                        <input
+                          type="text"
+                          name="address"
+                          placeholder="Address"
+                          className="form-control form-row mb-3"
+                          onChange={handleChange}
+                          value={customer.address}
+                        />
+                      </div>
+
+                      <div>
+                        <input
+                          type="text"
+                          name="phone_number"
+                          placeholder="Phone Number"
+                          className="form-control form-row mb-3"
+                          onChange={handleChange}
+                          value={customer.phone_number}
+                        />
+                      </div>
+                      <div>
+                        <button className="btn btn-primary">Submit Contact</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
     </div>
   );
 }

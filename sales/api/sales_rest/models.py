@@ -13,6 +13,7 @@ class AutoMobileInventoryVO(models.Model):
 
 
 
+
 class Customer(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=200)

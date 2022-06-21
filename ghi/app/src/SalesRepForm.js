@@ -33,33 +33,41 @@ function SalesRepForm() {
     }
   
     return (
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <h3>New Employee Form</h3>
-          </div>
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              onChange={handleChange}
-              value={salesRep.name}
-            />
-          </div>
-          <div>
-            <input
-              type="number"
-              name="employee_id"
-              placeholder="Employee ID#"
-              onChange={handleChange}
-              value={salesRep.employee_id}
-            />
-          </div>
-          <div>
-            <button>Submit Contact</button>
-          </div>
-        </form>
+      <div className="">
+          <div className="row">
+              <div className="offset-3 col-6">
+                  <div className="shadow p-4 mt-4">
+                    <form onSubmit={handleSubmit}>
+                      <div>
+                        <h3>New Employee Form</h3>
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="Name"
+                          onChange={handleChange}
+                          value={salesRep.name}
+                          className="form-control form-row mb-3"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          onChange={handleChange}
+                          type="number"
+                          name="employee_id"
+                          placeholder="Employee ID#"
+                          value={salesRep.employee_id}
+                          className="form-control form-row mb-3"
+                        />
+                      </div>
+                      <div className="text-center">
+                        <button className="btn btn-primary">Submit Contact</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
       </div>
     );
   }

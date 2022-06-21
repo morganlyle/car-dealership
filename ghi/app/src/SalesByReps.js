@@ -1,65 +1,27 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect} from 'react'
+import NumberFormat from 'react-number-format';
 export default function SalesByReps({salesReps}) {
     const [saleDetails, setSaleDetail] = useState({
         salesReps: [],
         salerep: ""
     })
-    console.log(salesReps)
+    const [items, setItems] = useState([])
 
-    const handleChange = (event) => {
+    const handleChange =(event) => {
         setSaleDetail({ ...saleDetails, [event.target.name]: event.target.value})
     }
-    async function returnList() {
-        let salerepState = {...saleDetails}
-        console.log(salerepState)
-        let id = salerepState.salerep
-        console.log(id)
-        const saleRepDetailUrl = `http://localhost:8090/api/sales-reps/${id}`
-        console.log("This is the state employee ID url: ", saleRepDetailUrl)
-        
-        const fetchConfig = {
-            method: "get",
-        }
-        const response = await fetch(saleRepDetailUrl, fetchConfig);
+    useEffect(() => {
+        returnDetail();
+        async function returnDetail(){
+            const response = await fetch(`http://localhost:8090/api/sales-reps/${saleDetails.salerep}`)
         if (response.ok) {
             const saleRepDetail = await response.json();
-            console.log("this should be the data on rep :", saleRepDetail)
+            setItems(saleRepDetail)
+            console.log("this should be the data on rep:", saleRepDetail)
+        }
         }
         
-        return (
-            <React.Fragment>
-            <h1>All Sales</h1>
-            <div className="container-fluid">
-                <table className="table table-striped table-hover">
-                <thead>
-                    <tr>
-                    <th scope="col">Sales person</th>
-                    <th >Customer</th>
-                    <th>VIN</th>
-                    <th>Sale price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* {.map(sale => {
-                    return (
-                        <tr key={sale.id}>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        </tr>
-                    );
-                    })} */}
-                </tbody>
-                </table>
-            </div>
-            </React.Fragment>
-        )
-    }
-    
-
-
+    }, [saleDetails.salerep])
     return (
         <React.Fragment>
         <div className="form-container">
@@ -80,6 +42,31 @@ export default function SalesByReps({salesReps}) {
                     </select>
                 </div>
                 <div>
+                <h1>All Sales</h1>
+        <div className="container-fluid">
+            <table className="table table-striped table-hover">
+            <thead>
+                <tr>
+                <th scope="col">Sales person</th>
+                <th >Customer</th>
+                <th>VIN</th>
+                <th>Sale price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {items.salesmade && items.salesmade.map(sale => {
+                return (
+                    <tr>
+                    <td>{items.name}</td>
+                    <td>{sale.customer.name}</td>
+                    <td>{sale.automobile.vehicle_vin}</td>
+                    <td><NumberFormat value={sale.sale_price} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
+                    </tr>
+                );
+                })}
+            </tbody>
+            </table>
+        </div>
                 </div>
                 {/* <div>
                 <button>Submit Contact</button>
