@@ -8,3 +8,62 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function getSaleData() {
+  const customerResponse = await fetch('http://localhost:8090/api/customers/')
+  const carInventoryResponse = await fetch('http://localhost:8090/api/cars')
+  const salesRepResponse = await fetch('http://localhost:8090/api/sales-reps/')
+  const salesListResponse = await fetch('http://localhost:8090/api/sales/')
+  const manufacturerResponse = await fetch('http://localhost:8100/api/manufacturers/')
+  const vehichleModelResponse = await fetch('http://localhost:8100/api/models/')
+  const inventoryResposne = await fetch('http://localhost:8100/api/automobiles/')
+  if (
+    customerResponse.ok &&
+    carInventoryResponse.ok && 
+    salesRepResponse.ok &&
+    salesListResponse.ok &&
+    manufacturerResponse.ok &&
+    vehichleModelResponse.ok && 
+    inventoryResposne.ok
+  ) {
+    const customersData = await customerResponse.json();
+    const carInventoryData = await carInventoryResponse.json();
+    const salesRepsData = await salesRepResponse.json();
+    const salesListData = await salesListResponse.json();
+    const manufacturerData = await manufacturerResponse.json();
+    const vehichleModelData = await vehichleModelResponse.json();
+    const inventoryResposneData = await inventoryResposne.json();
+    root.render(
+      <React.StrictMode>
+        <App
+        customers={customersData.customers}
+        cars={carInventoryData.Cars}
+        salesReps={salesRepsData.Sales_Reps}
+        salesList={salesListData.sales}
+        manufacturers={manufacturerData.manufacturers}
+        vehichleModels={vehichleModelData.models}
+        inventory={inventoryResposneData.autos}
+        />
+      </React.StrictMode>
+    )
+  }
+
+}
+getSaleData();
+
+
+
