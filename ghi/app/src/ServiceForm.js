@@ -17,7 +17,7 @@ class ServiceForm extends React.Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleTimeChange = this.handleTimeChange.bind(this);
-        this.handleReasonsChange = this.handleReasonsChange.bind(this);
+        this.handleReasonChange = this.handleReasonChange.bind(this);
         this.handleVipChange = this.handleVipChange.bind(this);
         this.handleTechnicianChange = this.handleTechnicianChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -65,7 +65,7 @@ class ServiceForm extends React.Component {
         const value = event.target.value
         this.setState({time: value})
     }
-    handleReasonsChange(event){
+    handleReasonChange(event){
         const value = event.target.value
         this.setState({reason: value})
     }

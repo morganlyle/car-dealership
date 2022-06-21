@@ -17,9 +17,9 @@ from service_rest.models import AutomobileVO
 def get_automobile():
     response = requests.get('http://inventory-api:8000/api/automobiles/')
     content = json.loads(response.content)
-    for automobile in content['automobile']:
+    for automobile in content['autos']:
         AutomobileVO.objects.update_or_create(
-            import_href=automobile['href'], defaults={'vin':automobile['vin']}
+        vins= automobile['vin']
         )
 
 def poll():
