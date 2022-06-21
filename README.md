@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Morgan - services
+* Tristen - sales?
 
 ## Design
 
@@ -16,3 +16,5 @@ microservice, here.
 
 Explain your models and integration with the inventory
 microservice, here.
+
+BOUNDED CONTEXTTTT
