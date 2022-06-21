@@ -58,17 +58,6 @@ class SaleRepList(APIView):
     def post(self):
         pass
 
-
-
-# @require_http_methods(["GET"])
-# def api__list_salesrep(request):
-#     if request.method == "GET":
-#         salesReps = SalesRep.objects.all()
-#         print(salesReps)
-#         serializer = SaleRepSerializer(salesReps, many=True)
-#         print("This is the serializer", serializer)
-#         return JsonResponse(serializer.data, safe=False)
-
 @require_http_methods(["GET", "POST"])
 def api__list_salesrep(request):
     if request.method == "GET":
@@ -99,15 +88,20 @@ def api_salesmade(request):
         if request.method == "POST":
             content = json.loads(request.body)
             automobileVO = AutoMobileInventoryVO.objects.get(vehicle_vin=content['automobile'])
-            content['automobile'] = automobileVO
-            sales_repVO = SalesRep.objects.get(employee_id=content['sales_rep'])
-            content['sales_rep'] = sales_repVO
-            customerVO = Customer.objects.get(id=content["customer"])
-            content['customer'] = customerVO
-            sale = SaleRecord.objects.create(**content)
-            sales_repVO.salesmade.add(sale)
-            response = SaleMadeSerializer(instance=sale)
-            return JsonResponse (response.data)
+            if automobileVO.sold == False:
+                automobileVO.sold = True
+                automobileVO.save()
+                content['automobile'] = automobileVO
+                sales_repVO = SalesRep.objects.get(employee_id=content['sales_rep'])
+                content['sales_rep'] = sales_repVO
+                customerVO = Customer.objects.get(id=content["customer"])
+                content['customer'] = customerVO
+                sale = SaleRecord.objects.create(**content)
+                sales_repVO.salesmade.add(sale)
+                response = SaleMadeSerializer(instance=sale)
+                return JsonResponse (response.data)
+            else:
+                return JsonResponse({"message": "This car has been sold already"})
 
             
 

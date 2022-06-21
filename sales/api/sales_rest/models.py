@@ -6,10 +6,12 @@ class AutoMobileInventoryVO(models.Model):
     vehicle_vin = models.CharField(max_length=20, unique=True)
     model = models.CharField(max_length=50, null=True)
     manufacturer = models.CharField(max_length=50 , null=True)
+    sold = models.BooleanField(default=False)
 
     def __str__(self):
         return f'Manufacturer: {self.manufacturer} Model: {self.model} VIN#: {self.vehicle_vin}'
 
+    
 
 
 
