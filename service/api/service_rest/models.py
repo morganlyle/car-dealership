@@ -1,6 +1,10 @@
 from django.db import models
 
 # Create your models here.
+
+class Status(models.Model):
+    name = models.CharField(max_length=25, unique=True)
+    
 class Technician(models.Model):
     name= models.CharField(max_length=100, unique=True)
     employee_number= models.PositiveSmallIntegerField()
@@ -10,6 +14,7 @@ class Technician(models.Model):
     
 class AutomobileVO(models.Model):
     vins = models.CharField(max_length=100, unique=True)
+    
     def __str__(self):
         return self.vins
 
@@ -22,5 +27,24 @@ class Appointment(models.Model):
     vip = models.BooleanField(default=False)
     technician = models.ForeignKey(Technician, related_name="technician",
                                    on_delete=models.PROTECT)
+    status = models.ForeignKey(Status, related_name="appointments", on_delete=models.PROTECT)
+    
+    @classmethod
+    def create(cls, **kwargs):
+        kwargs['status'] = Status.objects.get(name='SCHEDULED')
+        appointment = cls(**kwargs)
+        appointment.save()
+        return appointment
+    
+    def completed(self):
+        status = Status.objects.get(name='COMPLETED')
+        self.status = status
+        self.save()
+        
+    def cancelled(self):
+        status = Status.objects.get(name='CANCELLED')
+        self.status = status
+        self.save
+    
     def __str__(self):
         return f'{self.vin} {self.reason}'

@@ -50,7 +50,7 @@ async function getSaleData() {
         vehichleModels={vehichleModelData.models}
         inventory={inventoryResposneData.autos}
         services={servicesResponseData.appointments}
-        technicians={technicianResponseData.technicians}
+        technician={technicianResponseData.technicians}
         
         />
       </React.StrictMode>

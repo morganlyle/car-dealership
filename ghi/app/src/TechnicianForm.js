@@ -16,18 +16,18 @@ class TechnicianForm extends React.Component {
       event.preventDefault()
       const data = { ...this.state }
       data.employee_number = data.employeeNumber
+      delete data.employeeNumber;
       delete data.technician
-      delete data.employeeNumber
-      
       console.log('data', data)
       const technicianURL = 'http://localhost:8080/api/technicians/';
       const fetchConfig = {
-          method: 'post',
-          body: JSON.stringify(data),
-          headers: {
-              'Content-tpe': 'application/json'
-          },
-      };
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+          
+      }
       const response = await fetch(technicianURL, fetchConfig);
       if (response.ok) {
           const newTechnician = await response.json()
@@ -37,9 +37,10 @@ class TechnicianForm extends React.Component {
               employeeNumber: '',
           };
           this.setState(cleared);
+          
       }
   }
-
+  
     handleNameChange(event) {
         const value = event.target.value
         this.setState({ name: value })
@@ -48,7 +49,15 @@ class TechnicianForm extends React.Component {
         const value = event.target.value
         this.setState({ employeeNumber: value })
     }
-
+    
+    // async componentDidMount() {
+    //   const technicianURL = 'http://localhost:8080/api/technicians/'
+    //   const response = await fetch(technicianURL)
+    //   if (response.ok){
+    //     const data = await response.json()
+    //     this.setState({technician: data.technician})
+    //   }
+    // }
     
 
     render() {
@@ -75,7 +84,7 @@ class TechnicianForm extends React.Component {
                               <input
                                 onChange={this.handleEmployeeNumberChange}
                                 type="number"
-                                name="employee_number"
+                                name="employeeNumber"
                                 placeholder="Employee Number"
                                 value={this.state.employeeNumber}
                                 className="form-control form-row mb-3"

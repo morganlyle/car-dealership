@@ -5,7 +5,7 @@ class ServiceHistory extends React.Component {
     super(props);
     this.state = {
         vin: '',
-        services: [],
+        appointments: [],
     };
 
     this.handleVinChange = this.handleVinChange.bind(this);
