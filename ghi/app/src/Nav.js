@@ -59,6 +59,30 @@ function Nav() {
               </ul>
             </li>
           </ul>
+          <ul className="navbar-nav">
+            <li className="nav-item dropdown">
+              <NavLink className="nav-link dropdown-toggle" to="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Automobile Services 
+              </NavLink>
+              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li className="nav-item">
+                    <NavLink className="nav-link active" aria-current="page" to="/services/">Services</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link active" aria-current="page" to="/technicians/">New Technician</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link active" aria-current="page" to="/services/">Service List</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link active" aria-current="page" to="/services/new">Service Form</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link active" aria-current="page" to="/services/inventory">Service History</NavLink>
+                  </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
       

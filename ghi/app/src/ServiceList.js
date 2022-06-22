@@ -10,6 +10,14 @@ function ServiceList({ services }) {
             }
         }).then(() => { window.location.reload(); });
     }
+    const completeService = async (id) => {
+        fetch(`http://localhost:8080/api/services/${id}`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => { window.location.reload(); });
+    }
 
     return (
         <table className="table table-striped table-hover">
@@ -20,14 +28,14 @@ function ServiceList({ services }) {
                     <th>Date</th>
                     <th>Time</th>
                     <th>Reason</th>
-                    <th>VIP?</th>
+                    <th>VIP</th>
                     <th>Technician</th>
                     <th>Appointment Complete</th>
                     <th>Cancel Appointment</th></tr>
             </thead>
             <tbody>
-                {console.log('data')}
-                {services.map(services => {
+                {console.log(services, 'data')}
+                {services && services.map(services => {
                     return (
                     <tr key={services.id}>
                         <td>{services.vin}</td>
@@ -37,6 +45,7 @@ function ServiceList({ services }) {
                         <td>{services.reason}</td>
                         <td>{services.vip}</td>
                         <td>{services.technician.name}</td>
+                        <td><button onClick={() => completeService(services.id)} type='button' className='btn btn-outline-dark'>Complete</button></td>
                         <td><button onClick={() => deleteService(services.id)} type='button' className='btn btn-outline-dark'>Cancel</button></td>
                     </tr>
                     )

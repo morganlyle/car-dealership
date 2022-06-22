@@ -12,6 +12,34 @@ class TechnicianForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+    async handleSubmit(event) {
+      event.preventDefault()
+      const data = { ...this.state }
+      data.employee_number = data.employeeNumber
+      delete data.technician
+      delete data.employeeNumber
+      
+      console.log('data', data)
+      const technicianURL = 'http://localhost:8080/api/technicians/';
+      const fetchConfig = {
+          method: 'post',
+          body: JSON.stringify(data),
+          headers: {
+              'Content-tpe': 'application/json'
+          },
+      };
+      const response = await fetch(technicianURL, fetchConfig);
+      if (response.ok) {
+          const newTechnician = await response.json()
+          console.log(newTechnician)
+          const cleared = {
+              name: '',
+              employeeNumber: '',
+          };
+          this.setState(cleared);
+      }
+  }
+
     handleNameChange(event) {
         const value = event.target.value
         this.setState({ name: value })
@@ -21,30 +49,7 @@ class TechnicianForm extends React.Component {
         this.setState({ employeeNumber: value })
     }
 
-    async handleSubmit(event) {
-        event.preventDefault()
-        const data = { ...this.state }
-        data.employee_number = data.employeeNumber
-        console.log('data', data)
-        const technicianURL = 'http://localhost:8080/api/technicians/';
-        const fetchConfig = {
-            method: 'post',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-tpe': 'application/json'
-            },
-        };
-        const response = await fetch(technicianURL, fetchConfig);
-        if (response.ok) {
-            const newTechnician = await response.json()
-            console.log(newTechnician)
-            const cleared = {
-                name: '',
-                employeeNumber: '',
-            };
-            this.setState(cleared);
-        }
-    }
+    
 
     render() {
         return (

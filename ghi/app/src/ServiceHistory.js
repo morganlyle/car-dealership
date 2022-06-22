@@ -9,8 +9,8 @@ class ServiceHistory extends React.Component {
     };
 
     this.handleVinChange = this.handleVinChange.bind(this);
-    this.handleServiceChange = this.handleServiceChange.bind()
-    this.handleVinSearch = this.handleVinSearch.bind(this)
+    this.handleServiceChange = this.handleServiceChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount(){
@@ -19,6 +19,21 @@ class ServiceHistory extends React.Component {
             const data = await response.json();
             this.setState({services: data.services});
         }
+    }
+
+    handleVinChange(event) {
+        const value = event.target.value
+        this.setState({vin: value})
+    }
+    handleServiceChange(event) {
+        const value = event.target.value
+        this.setState({services: value})
+    }
+    handleSubmit(event){
+        event.preventDefault()
+        const data = {...this.state}
+
+
     }
 }
 
