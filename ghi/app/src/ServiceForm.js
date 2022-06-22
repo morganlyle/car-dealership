@@ -182,3 +182,6 @@ class ServiceForm extends React.Component {
 
     };
 }
+
+
+export default ServiceForm;
