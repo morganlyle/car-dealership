@@ -55,7 +55,7 @@ function App({customers, cars, salesReps, salesList, manufacturers, vehichleMode
           <Route path="services">
             <Route path="" element={<ServiceList services={services}/>}/>
             <Route path="new" element={<ServiceForm/>}/>
-
+              
           </Route>
           <Route path="technicians">
             <Route path="" element={<TechnicianForm services={technician}/>}/>

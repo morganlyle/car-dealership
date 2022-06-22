@@ -78,7 +78,7 @@ function Nav() {
                     <NavLink className="nav-link active" aria-current="page" to="/services/new">Service Form</NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link active" aria-current="page" to="/services/inventory">Service History</NavLink>
+                    <NavLink className="nav-link active" aria-current="page" to="/services/create">Service History</NavLink>
                   </li>
               </ul>
             </li>
