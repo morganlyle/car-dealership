@@ -13,13 +13,13 @@ class ServiceHistory extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    async componentDidMount(){
-        const response = await fetch('https://localhost:8080/api/services/');
-        if (response.ok) {
-            const data = await response.json();
-            this.setState({appointments: data.appointments});
-        }
-    }
+    // async componentDidMount(){
+    //     const response = await fetch('https://localhost:8080/api/services/');
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         this.setState({appointments: data.appointments});
+    //     }
+    // }
 
     handleVinChange(event) {
         const value = event.target.value
@@ -29,35 +29,45 @@ class ServiceHistory extends React.Component {
         const value = event.target.value
         this.setState({services: value})
     }
-    handleSubmit(event){
+    async handleSubmit(event){
         event.preventDefault()
         const data = {...this.state}
 
-        const servicesUrl = 'https://localhost:8080/api/services/'
+        const servicesUrl = `https://localhost:8080/api/services/create/${data}/`
         const fetchConfig = {
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
         }
         const response = await fetch(servicesUrl, fetchConfig);
         if (response.ok){
-            const results = await response.json()
+            const response = await response.json()
         }
 
     }
-    render(){
+    render() {
+      const { appointments: appointments } = this.state;
+    
+      let appointmentsList = appointments.length > 0
+        && appointments.map((vin) => {
+        return (
+          <option key={vin.id} value={vin.id}>{vin.name}</option>
+        )
+      }, this);
+    
     return (
         <div>
-        <div className="input-group">
+        <div className="form-select">
+          
+        <div className="service-list">
+          <h1>Service history</h1>
           <form onSubmit={this.handleSubmit} id="search-vin">
             <div className="form-outline">
-              <input type="submit" id="form" 
+              <select
                 onChange={this.handleVinChange} value={this.state.vin} 
-                className="table table-striped table-hover" placeholder="Submit" />
+                className="table table-striped table-hover" id='vin' placeholder="Submit" />
             </div>
           </form>
           </div>
-        <div className="service-list">
-          <h1>Service history</h1>
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -72,7 +82,7 @@ class ServiceHistory extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.appointments.filter(appointments => 
-                appointments.vin === this.state.vin).map(service => {
+                appointments.vin.map(service => {
                 return (
                   <tr key={ service.id }>
                     <td>{ service.vin }</td>
@@ -82,9 +92,10 @@ class ServiceHistory extends React.Component {
                     <td>{ service.technician.name }</td>
                     <td>{ service.reason }</td>
                     <td>{ service.status.name }</td>
+                    <td>{service.appointmentsList}</td>
                   </tr>
               );
-          })}
+          }))}
           </tbody>
         </table>
         </div>

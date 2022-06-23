@@ -9,8 +9,9 @@ class ServiceForm extends React.Component {
             date: '',
             time: '',
             reason: '',
-            vip: '',
-            technician: [],
+       
+            technician: '',
+            technicians: [],
         };
 
         this.handleVinChange = this.handleVinChange.bind(this);
@@ -18,35 +19,9 @@ class ServiceForm extends React.Component {
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleReasonChange = this.handleReasonChange.bind(this);
-        this.handleVipChange = this.handleVipChange.bind(this);
+       
         this.handleTechnicianChange = this.handleTechnicianChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    async handleSubmit(event){
-        const data = {...this.state}
-        delete data.technician
-        const serviceURL = 'http://localhost:8080/api/services/'
-        const fetchConfig = {
-            method: 'post',
-            body: JSON.stringify(data),
-            headers: { ' Content-type': 'application/json',}
-        };
-        const response = await fetch(serviceURL, fetchConfig);
-        if (response.ok){
-            const newService = await response.json();
-            console.log(newService);
-            const cleared = {
-            vin: '',
-            name: '',
-            date: '',
-            time: '',
-            reason: '',
-            vip: '',
-            technician: [],
-            }
-            this.setState(cleared);
-        }
     }
 
     handleVinChange(event){
@@ -69,23 +44,46 @@ class ServiceForm extends React.Component {
         const value = event.target.value
         this.setState({reason: value})
     }
-    handleVipChange(event){
-        const value = event.target.value
-        this.setState({vip: value})
-    }
+    
     handleTechnicianChange(event){
         const value = event.target.value
         this.setState({technician: value})
     }
 
     async componentDidMount() {
-        const url = 'http://localhost:8080/api/technicians'
+        const url = 'http://localhost:8080/api/technicians/'
         const response = await fetch(url);
         if (response.ok){
             const data = await response.json()
-            this.setState({technician: data.technician})
+            this.setState({technicians: data.technicians})
         }
     }
+
+    async handleSubmit(event){
+      event.preventDefault();
+      const data = {...this.state}
+      delete data.technicians
+      const serviceURL = 'http://localhost:8080/api/services/'
+      const fetchConfig = {
+          method: 'post',
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json',}
+      };
+      const response = await fetch(serviceURL, fetchConfig);
+      if (response.ok){
+          const newService = await response.json();
+          console.log(newService);
+          const cleared = {
+          vin: '',
+          name: '',
+          date: '',
+          time: '',
+          reason: '',
+          technician: '',
+          }
+          this.setState(cleared);
+      }
+  }
     render() {
         return (
             <div className="my-5 container">
@@ -146,22 +144,13 @@ class ServiceForm extends React.Component {
                                 className="form-control form-row mb-3"
                               />
                             </div>
+                          
                             <div className="mb-3">
-                              <input
-                                onChange={this.handleVipChange}
-                                type="text"
-                                name="vip"
-                                placeholder="Vip"
-                                value={this.state.vip}
-                                className="form-control form-row mb-3"
-                              />
-                            </div>
-                            <div className="mb-3">
-                                <select  onChange={this.handleTechnicianChange} multiple={false} value={this.state.technician} required name="technician" id="technician" className="form-select">
+                                <select  onChange={this.handleTechnicianChange} value={this.state.technician} required name="technician" id="technician" className="form-select">
                                     <option>Choose a technician</option>
-                                    {this.state.technician.map(technician => {
+                                    {this.state.technicians.map(technician => {
                                         return (
-                                            <option key={technician.id} value={technician.href}>
+                                            <option key={technician.id} value={technician.name}>
                                                 {technician.name}
                                             </option>
                                         );

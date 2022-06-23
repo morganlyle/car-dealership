@@ -17,13 +17,13 @@ class Technician(models.Model):
         return self.name 
     
 class AutomobileVO(models.Model):
-    vins = models.CharField(max_length=100, unique=True)
+    vins = models.CharField(max_length=100)
     
     def __str__(self):
         return self.vins
 
 class Appointment(models.Model):
-    vin = models.CharField(max_length=25, unique=True)
+    vin = models.CharField(max_length=25)
     name = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)
     time = models.DateTimeField(auto_now_add=True)

@@ -10,6 +10,7 @@ from .models import AutomobileVO, Appointment, Status, Technician
 class StatusEncoder(ModelEncoder):
     model = Status
     properties = ['name', 'id']
+    
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
@@ -43,7 +44,7 @@ class AppointmentEncoder(ModelEncoder):
                 }
     
     def get_extra_data(self, o):
-        count = AutomobileVO.objects.filter(vins=o.vins).count()
+        count = AutomobileVO.objects.filter(vins=o.vin).count()
         return{'vip': count > 0}
 
     
@@ -123,12 +124,10 @@ def api_create_appointment(request, pk):
     appointment.create()
     return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
     
-
-     
 @require_http_methods(['PUT'])
 def api_finished_appointment(requests, pk):
     appointment = Appointment.objects.get(id=pk)
-    appointment.completed()
+    appointment.finished()
     return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
 
 @require_http_methods(['PUT'])
