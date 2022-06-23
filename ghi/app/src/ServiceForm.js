@@ -9,7 +9,6 @@ class ServiceForm extends React.Component {
             date: '',
             time: '',
             reason: '',
-       
             technician: '',
             technicians: [],
         };

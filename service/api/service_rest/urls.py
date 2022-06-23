@@ -15,6 +15,6 @@ urlpatterns = [
     path('services/<int:pk>/', api_show_appointments, name='api_show_appointments'),
     path('services/finished/', api_finished_appointment, name='api_finished_appointment'),
     path('services/cancelled', api_cancelled_appointment, name='api_cancelled_appointment'),
-    path('services/create/', api_create_appointment, name='api_create_appointment'), 
+    path('services/history/', api_create_appointment, name='api_create_appointment'), 
     path('technicians/', api_list_technicians, name='api_list_technicians'),
 ]

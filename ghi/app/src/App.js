@@ -15,7 +15,7 @@ import ServiceList from './ServiceList';
 import ServiceForm from './ServiceForm';
 import TechnicianForm from './TechnicianForm';
 import ServiceHistory from './ServiceHistory';
-function App({customers, cars, salesReps, salesList, manufacturers, vehichleModels, services, technician,}) {
+function App({customers, cars, salesReps, salesList, manufacturers, vehichleModels, services, technician,serviceHistory}) {
   return (
     <BrowserRouter>
       <Nav />
@@ -56,7 +56,7 @@ function App({customers, cars, salesReps, salesList, manufacturers, vehichleMode
           <Route path="services">
             <Route path="" element={<ServiceList services={services}/>}/>
             <Route path="new" element={<ServiceForm/>}/>
-            <Route path='create' element={<ServiceHistory element/>}/>
+            <Route path='history' element={<ServiceHistory history={serviceHistory}/>}/>
               
           </Route>
           <Route path="technicians">

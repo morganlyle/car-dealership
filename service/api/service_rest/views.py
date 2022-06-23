@@ -44,8 +44,11 @@ class AppointmentEncoder(ModelEncoder):
                 }
     
     def get_extra_data(self, o):
-        count = AutomobileVO.objects.filter(vins=o.vin).count()
-        return{'vip': count > 0}
+        try:
+            AutomobileVO.objects.filter(vins=o.vin)
+            return{'vip': True}
+        except:
+            return{'vip': False}
 
     
 @require_http_methods(['GET', 'POST'])
@@ -55,7 +58,7 @@ def api_list_appointments(request):
         appointments = Appointment.objects.filter(status=status)
         return JsonResponse(
             {'appointments': appointments},
-            encoder=AppointmentEncoder
+            encoder=AppointmentEncoder, safe=False
         )
     else: 
         content = json.loads(request.body)
