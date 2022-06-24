@@ -57,7 +57,7 @@ function Nav() {
                     <NavLink className="nav-link active" aria-current="page" to="/automobile/inventory">Vehicle Inventory</NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link active" aria-current="page" to="/automobile/new">Add Vehicle to Inventory</NavLink>
+                    <NavLink className="nav-link active" aria-current="page" to="/automobile/add-to-inventory">Add Vehicle to Inventory</NavLink>
                   </li>
               </ul>
             </li>

@@ -17,7 +17,7 @@ export default function VehicleInventoryForm({model}) {
         const data = {...inventoryModel}
         console.log("this is the data from the form", data)
         delete data.model
-        const inventoryUrl = "http://localhost:8100/api/automobile/new/";
+        const inventoryUrl = "http://localhost:8100/api/automobile/add-to-inventory/";
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
