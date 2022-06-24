@@ -2,5 +2,8 @@
     "python.analysis.extraPaths": [
         "./sales/api/sales_rest",
         "./sales/api"
+    ],
+    "cSpell.words": [
+        "microservices"
     ]
 }

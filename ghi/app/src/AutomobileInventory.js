@@ -16,7 +16,7 @@ export default function AutomobileInventory({inventory}) {
                 <th>Color</th>
                 <th>Year</th>
                 <th>Model</th>
-                {/* <th>Manufacturer</th> */}
+                <th>Manufacturer</th>
                 <th>Stock</th>
                 
                 </tr>
@@ -30,7 +30,7 @@ export default function AutomobileInventory({inventory}) {
                             <td>{ vehicle.color }</td>
                             <td>{ vehicle.year }</td>
                             <td>{ vehicle.model.name }</td>
-                            {/* <td>{ vehicle.manufacturer}</td> */}
+                            <td>{ vehicle.manufacturer}</td>
                             <td style={{ color: "red" }}>SOLD</td>
                             </tr>
                     )
@@ -41,7 +41,7 @@ export default function AutomobileInventory({inventory}) {
                             <td>{ vehicle.color }</td>
                             <td>{ vehicle.year }</td>
                             <td>{ vehicle.model.name }</td>
-                            {/* <td>{ vehicle.manufacturer }</td> */}
+                            <td>{ vehicle.manufacturer }</td>
                             <td style={{ color: "green" }}>Available</td>
                             </tr>
                     )
