@@ -51,7 +51,7 @@ function App({customers, cars, salesReps, salesList, manufacturers, vehichleMode
             <Route path="new" element={<VehicleModelForm manufacturers={manufacturers}/>}/>
           </Route>
           <Route path="automobile">
-            <Route path="inventory" element={<AutomobileInventory inventory={inventory}/>}/>
+            <Route path="inventory" element={<AutomobileInventory inventory={cars}/>}/>
             <Route path="add-to-inventory" element={<InventoryForm inventoryTwo={vehichleModels}/> } />
 
           </Route>

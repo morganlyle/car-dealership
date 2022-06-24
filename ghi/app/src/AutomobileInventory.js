@@ -26,10 +26,10 @@ export default function AutomobileInventory({inventory}) {
                     if (vehicle.sold) {
                         return (
                             <tr key={vehicle.id}>
-                            <td>{ vehicle.vin }</td>
+                            <td>{ vehicle.vehicle_vin }</td>
                             <td>{ vehicle.color }</td>
                             <td>{ vehicle.year }</td>
-                            <td>{ vehicle.model.name }</td>
+                            <td>{ vehicle.model }</td>
                             <td>{ vehicle.manufacturer}</td>
                             <td style={{ color: "red" }}>SOLD</td>
                             </tr>
@@ -37,11 +37,11 @@ export default function AutomobileInventory({inventory}) {
                     } else {
                         return (
                             <tr key={vehicle.id}>
-                            <td>{ vehicle.vin }</td>
+                            <td>{ vehicle.vehicle_vin }</td>
                             <td>{ vehicle.color }</td>
                             <td>{ vehicle.year }</td>
-                            <td>{ vehicle.model.name }</td>
-                            <td>{ vehicle.manufacturer }</td>
+                            <td>{ vehicle.model }</td>
+                            <td>{ vehicle.manufacturer}</td>
                             <td style={{ color: "green" }}>Available</td>
                             </tr>
                     )
