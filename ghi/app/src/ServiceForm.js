@@ -116,7 +116,7 @@ class ServiceForm extends React.Component {
                             <div className="mb-3">
                               <input
                                 onChange={this.handleDateChange}
-                                type="text"
+                                type="date"
                                 name="date"
                                 placeholder="Date"
                                 value={this.state.date}
@@ -126,7 +126,7 @@ class ServiceForm extends React.Component {
                             <div className="mb-3">
                               <input
                                 onChange={this.handleTimeChange}
-                                type="text"
+                                type="time"
                                 name="time"
                                 placeholder="Time"
                                 value={this.state.time}

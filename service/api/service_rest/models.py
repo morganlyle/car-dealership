@@ -18,7 +18,7 @@ class Technician(models.Model):
     
 class AutomobileVO(models.Model):
     vins = models.CharField(max_length=100)
-    vip = models.BooleanField(default=True)
+    vip = models.BooleanField(default=False)
     
     def __str__(self):
         return self.vins
@@ -26,12 +26,12 @@ class AutomobileVO(models.Model):
 class Appointment(models.Model):
     vin = models.CharField(max_length=25)
     name = models.CharField(max_length=100)
-    date = models.DateTimeField(auto_now_add=True)
-    time = models.DateTimeField(auto_now_add=True)
+    date = models.CharField(max_length=25)
+    time = models.CharField(max_length=25)
     reason = models.CharField(max_length=100)
-   
+    vip = models.BooleanField(default=False)
     technician = models.ForeignKey(Technician, related_name="technician",
-                                   on_delete=models.PROTECT)
+    on_delete=models.PROTECT)
     status = models.ForeignKey(Status, related_name="appointments", on_delete=models.PROTECT, default=1)
     
     @classmethod
