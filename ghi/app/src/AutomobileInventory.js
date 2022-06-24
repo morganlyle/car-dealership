@@ -2,10 +2,8 @@ import React, { useState }from 'react'
 
 export default function AutomobileInventory({inventory}) { 
     
-    
-    
+    console.log('list', inventory)
 
-    
 
     return (
         <React.Fragment>
@@ -14,9 +12,8 @@ export default function AutomobileInventory({inventory}) {
             <table className="table table-striped table-hover">
             <thead>
                 <tr>
-                
-                <th >VIN</th>
-                <th >Color</th>
+                <th>VIN</th>
+                <th>Color</th>
                 <th>Year</th>
                 <th>Model</th>
                 <th>Manufacturer</th>
@@ -28,22 +25,22 @@ export default function AutomobileInventory({inventory}) {
                 {inventory && inventory.map(vehicle => {
                     if (vehicle.sold) {
                         return (
-                            <tr>
-                            <td>{ vehicle.vehicle_vin }</td>
+                            <tr key={vehicle.id}>
+                            <td>{ vehicle.vin }</td>
                             <td>{ vehicle.color }</td>
                             <td>{ vehicle.year }</td>
-                            <td>{ vehicle.model }</td>
-                            <td>{ vehicle.manufacturer }</td>
+                            <td>{ vehicle.model.name }</td>
+                            <td>{ vehicle.manufacturer}</td>
                             <td style={{ color: "red" }}>SOLD</td>
                             </tr>
                     )
                     } else {
                         return (
-                            <tr>
-                            <td>{ vehicle.vehicle_vin }</td>
+                            <tr key={vehicle.id}>
+                            <td>{ vehicle.vin }</td>
                             <td>{ vehicle.color }</td>
                             <td>{ vehicle.year }</td>
-                            <td>{ vehicle.model }</td>
+                            <td>{ vehicle.model.name }</td>
                             <td>{ vehicle.manufacturer }</td>
                             <td style={{ color: "green" }}>Available</td>
                             </tr>

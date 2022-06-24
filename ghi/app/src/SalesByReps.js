@@ -41,7 +41,7 @@ export default function SalesByReps({salesReps}) {
                         })}
                     </select>
                 </div>
-                <div>
+                <div> 
                 <h1>All Sales</h1>
         <div className="container-fluid">
             <table className="table table-striped table-hover">

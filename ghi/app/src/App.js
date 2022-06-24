@@ -11,21 +11,26 @@ import VehicleModelList from './VehicleModelList';
 import ManufacturerForm from './ManufacturerForm';
 import VehicleModelForm from './VehicleModelForm';
 import AutomobileInventory from './AutomobileInventory';
-function App({customers, cars, salesReps, salesList, manufacturers, vehichleModels, inventory}) {
+import ServiceList from './ServiceList';
+import ServiceForm from './ServiceForm';
+import TechnicianForm from './TechnicianForm';
+import ServiceHistory from './ServiceHistory';
+import InventoryForm from './InventoryForm';
+function App({customers, cars, salesReps, salesList, manufacturers, vehichleModels, services, technician,serviceHistory, inventory}) {
+  console.log(inventory)
   return (
     <BrowserRouter>
       <Nav />
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-
-
           <Route path="customer">
             <Route path="new" element={<CustomerForm />}/>
           </Route>
           <Route path="employee">
             <Route path="new" element={<SalesRepForm/>}/>
           </Route>
+
           <Route path="sales">
             <Route path="" element={<SalesList salesList={salesList}/>}/>
             <Route path="by-rep" element={<SalesByReps salesReps={salesReps}/>}/>
@@ -34,6 +39,7 @@ function App({customers, cars, salesReps, salesList, manufacturers, vehichleMode
               cars={cars}
               salesReps={salesReps}
             />}/>
+            
           </Route>
           <Route path="manufacturers">
             <Route path="" element={<ListManufacturers manufacturers={manufacturers}/>}/>
@@ -45,8 +51,18 @@ function App({customers, cars, salesReps, salesList, manufacturers, vehichleMode
             <Route path="new" element={<VehicleModelForm manufacturers={manufacturers}/>}/>
           </Route>
           <Route path="automobile">
-            <Route path="inventory" element={<AutomobileInventory inventory={cars}/>}/>
-            <Route path="add-to-inventory"/>
+            <Route path="inventory" element={<AutomobileInventory inventory={inventory}/>}/>
+            <Route path="add-to-inventory" element={<InventoryForm inventoryTwo={vehichleModels}/> } />
+
+          </Route>
+          <Route path="services">
+            <Route path="" element={<ServiceList services={services}/>}/>
+            <Route path="new" element={<ServiceForm/>}/>
+            <Route path='history' element={<ServiceHistory history={serviceHistory}/>}/>
+              
+          </Route>
+          <Route path="technicians">
+            <Route path="" element={<TechnicianForm services={technician}/>}/>
 
           </Route>
         </Routes>

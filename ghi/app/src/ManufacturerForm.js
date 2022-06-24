@@ -27,6 +27,7 @@ export default function ManufacturerForm() {
         }
 
     }
+    
     return (
         <div className="">
             <div className="row">

@@ -3,7 +3,7 @@ import React from 'react'
 export default function VehicleModelList({vehichleModels}) {
   return (
     <React.Fragment>
-    <h1>All manufacturer's</h1>
+    <h1>All Vehicle Models</h1>
       <div className="container-fluid">
         <table className="table table-striped table-hover">
           <thead>

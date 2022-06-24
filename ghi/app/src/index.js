@@ -9,20 +9,6 @@ root.render(
   </React.StrictMode>
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 async function getSaleData() {
   const customerResponse = await fetch('http://localhost:8090/api/customers/')
   const carInventoryResponse = await fetch('http://localhost:8090/api/cars')
@@ -31,6 +17,8 @@ async function getSaleData() {
   const manufacturerResponse = await fetch('http://localhost:8100/api/manufacturers/')
   const vehichleModelResponse = await fetch('http://localhost:8100/api/models/')
   const inventoryResposne = await fetch('http://localhost:8100/api/automobiles/')
+  const servicesResponse = await fetch('http://localhost:8080/api/services/')
+  const technicianResponse = await fetch('http://localhost:8080/api/technicians/')
   if (
     customerResponse.ok &&
     carInventoryResponse.ok && 
@@ -38,7 +26,9 @@ async function getSaleData() {
     salesListResponse.ok &&
     manufacturerResponse.ok &&
     vehichleModelResponse.ok && 
-    inventoryResposne.ok
+    inventoryResposne.ok &&
+    servicesResponse.ok &&
+    technicianResponse.ok
   ) {
     const customersData = await customerResponse.json();
     const carInventoryData = await carInventoryResponse.json();
@@ -47,6 +37,8 @@ async function getSaleData() {
     const manufacturerData = await manufacturerResponse.json();
     const vehichleModelData = await vehichleModelResponse.json();
     const inventoryResposneData = await inventoryResposne.json();
+    const servicesResponseData = await servicesResponse.json();
+    const technicianResponseData = await technicianResponse.json();
     root.render(
       <React.StrictMode>
         <App
@@ -57,6 +49,9 @@ async function getSaleData() {
         manufacturers={manufacturerData.manufacturers}
         vehichleModels={vehichleModelData.models}
         inventory={inventoryResposneData.autos}
+        services={servicesResponseData.appointments}
+        technician={technicianResponseData.technicians}
+        
         />
       </React.StrictMode>
     )
