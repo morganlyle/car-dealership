@@ -1,9 +1,10 @@
 import React from 'react';
+// import YesOrNo from 'react-yes-or-no';
 
 function ServiceList({ services }) {
 
     const deleteService = async (id) => {
-        fetch(`http://localhost:8080/api/services/${id}`, {
+        fetch(`http://localhost:8080/api/services/${id}/`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json'
@@ -11,11 +12,12 @@ function ServiceList({ services }) {
         }).then(() => { window.location.reload(); });
     }
     const completeService = async (id) => {
-        fetch(`http://localhost:8080/api/services/${id}`, {
+        fetch(`http://localhost:8080/api/services/finished/${id}/`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json'
             }
+            
         }).then(() => { window.location.reload(); });
     }
 
@@ -37,17 +39,20 @@ function ServiceList({ services }) {
                 {console.log(services, 'data')}
                 {services && services.map(services => {
                     return (
-                    <tr key={services.id}>
-                        <td>{services.vin}</td>
-                        <td>{services.name}</td>
-                        <td>{services.date}</td>
-                        <td>{services.time}</td>
-                        <td>{services.reason}</td>
-                        <td>{services.vip}</td>
-                        <td>{services.technician.name}</td>
-                        <td><button onClick={() => completeService(services.id)} type='button' className='btn btn-outline-dark'>Complete</button></td>
-                        <td><button onClick={() => deleteService(services.id)} type='button' className='btn btn-outline-dark'>Cancel</button></td>
-                    </tr>
+                        <tr key={services.id}>
+                            <td>{services.vin}</td>
+                            <td>{services.name}</td>
+                            <td>{services.date}</td>
+                            <td>{services.time}</td>
+                            <td>{services.reason}</td>
+                            <td>{(services.vip)? 'Yes':'No'}</td>
+                            <td>{services.technician.name}</td>
+                            <td>
+                                <button onClick={() => completeService(services.id)} type='button' className='btn btn-outline-dark'>Complete</button></td>
+                            <td>
+                                <button onClick={() => deleteService(services.id)} type='button' className='btn btn-outline-dark'>Cancel</button>
+                            </td>
+                        </tr>
                     )
                 })}
             </tbody>

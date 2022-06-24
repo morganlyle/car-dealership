@@ -56,6 +56,9 @@ function Nav() {
                   <li className="nav-item">
                     <NavLink className="nav-link active" aria-current="page" to="/automobile/inventory">Vehicle Inventory</NavLink>
                   </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link active" aria-current="page" to="/automobile/new">Add Vehicle to Inventory</NavLink>
+                  </li>
               </ul>
             </li>
           </ul>
@@ -75,7 +78,7 @@ function Nav() {
                     <NavLink className="nav-link active" aria-current="page" to="/services/new">Service Form</NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link active" aria-current="page" to="/services/create">Service History</NavLink>
+                    <NavLink className="nav-link active" aria-current="page" to="/services/history">Service History</NavLink>
                   </li>
               </ul>
             </li>

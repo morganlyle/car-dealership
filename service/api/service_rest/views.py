@@ -9,12 +9,13 @@ from .models import AutomobileVO, Appointment, Status, Technician
 
 class StatusEncoder(ModelEncoder):
     model = Status
-    properties = ['name', 'id']
+    properties = ['name']
     
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         'vins',
+        'vip'
         'id', 
     ]
     
@@ -35,7 +36,7 @@ class AppointmentEncoder(ModelEncoder):
         'time',
         'technician',
         'reason',
-        'vip',
+       
         'id', 
         'status',
     ]
@@ -69,16 +70,17 @@ def api_list_appointments(request):
             technician = Technician.objects.get(name=content['technician'])
             content['technician'] = technician
             content['vip'] = True
-            appointment = Appointment.objects.create(**content)
-            return JsonResponse({"appointment": appointment}, encoder=AppointmentEncoder,) 
+            # appointment = Appointment.objects.create(**content)
+            # return JsonResponse({"appointment": appointment}, encoder=AppointmentEncoder,) 
             
             
         except AutomobileVO.DoesNotExist:
             print("this is not here")
             technician = Technician.objects.get(name=content['technician'])
             content['technician'] = technician
-            appointment = Appointment.objects.create(**content)
+            # appointment = Appointment.objects.create(**content)
             
+        appointment = Appointment.create(**content)
             # id = content['vin']
             # vins = AutomobileVO.objects.get(pk=id)
             # content['vin'] = vins
@@ -130,7 +132,7 @@ def api_create_appointment(request, pk):
 @require_http_methods(['PUT'])
 def api_finished_appointment(requests, pk):
     appointment = Appointment.objects.get(id=pk)
-    appointment.finished()
+    appointment.completed()
     return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
 
 @require_http_methods(['PUT'])

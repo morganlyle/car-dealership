@@ -15,7 +15,8 @@ import ServiceList from './ServiceList';
 import ServiceForm from './ServiceForm';
 import TechnicianForm from './TechnicianForm';
 import ServiceHistory from './ServiceHistory';
-function App({customers, cars, salesReps, salesList, manufacturers, vehichleModels, services, technician,serviceHistory}) {
+import InventoryForm from './InventoryForm';
+function App({customers, cars, salesReps, salesList, manufacturers, vehichleModels, services, technician,serviceHistory, model}) {
   return (
     <BrowserRouter>
       <Nav />
@@ -50,7 +51,7 @@ function App({customers, cars, salesReps, salesList, manufacturers, vehichleMode
           </Route>
           <Route path="automobile">
             <Route path="inventory" element={<AutomobileInventory inventory={cars}/>}/>
-            <Route path="add-to-inventory"/>
+            <Route path="add-to-inventory" element={<InventoryForm model={model}/> } />
 
           </Route>
           <Route path="services">
