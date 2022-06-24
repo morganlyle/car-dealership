@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 
-export default function VehicleInventoryForm({model}) {
-
+export default function VehicleInventoryForm({inventoryTwo}) {
+    console.log(inventoryTwo)
     const [inventoryModel, setInventoryModel] = useState({
         color: '',
         year: "",
-        model: [],
+        modelId: [],
+        model_id: '',
         vin: '',
     })
 
@@ -16,8 +17,9 @@ export default function VehicleInventoryForm({model}) {
         event.preventDefault();
         const data = {...inventoryModel}
         console.log("this is the data from the form", data)
-        delete data.model
-        const inventoryUrl = "http://localhost:8100/api/automobile/add-to-inventory/";
+        delete data.modelId
+        
+        const inventoryUrl = 'http://localhost:8100/api/automobiles/';
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -27,11 +29,14 @@ export default function VehicleInventoryForm({model}) {
         }
         const response = await fetch(inventoryUrl, fetchConfig);
         if (response.ok) {
-            setInventoryModel({color: "", year: "", model: [], vin: [],})
+            setInventoryModel({color: "", year: "", model_id: '', vin: '',})
         } else {
             console.log(response)
         }
     }
+
+
+
     return (
         <div className="">
             <div className="row">
@@ -44,7 +49,7 @@ export default function VehicleInventoryForm({model}) {
                             <div className="mb-3">
                                 <input
                                 type="text"
-                                name="name"
+                                name="color"
                                 placeholder="Color"
                                 onChange={handleChange}
                                 value={inventoryModel.color}
@@ -72,9 +77,9 @@ export default function VehicleInventoryForm({model}) {
                                 />
                             </div>
                             <div>
-                            <select onChange={handleChange} value={inventoryModel.model_id} required id="model_id" name="model_id" className="form-select form-control form-row mb-3">
+                            <select onChange={handleChange} value={inventoryModel.modelId}  id="model_id" name="model_id" className="form-select form-control form-row mb-3">
                                 <option value="">Choose a model</option>
-                                {model && model.map(model => {
+                                {inventoryTwo && inventoryTwo.map(model => {
                                     return (
                                     <option key={model.id} value={model.id}>
                                         {model.name}
