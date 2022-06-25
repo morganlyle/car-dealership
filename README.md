@@ -1,4 +1,23 @@
 # CarCar
+** IMPORTANT FOR AFTER RUNNING DOCKER COMMAND:
+-- Open CLI for project-beta-service-api- in docker. 
+-- RUN: python manage.py createsuperuser
+fill out necessary info
+
+-- log into admin http://localhost:8080/admin
+-- click on Statuss on left side of admin panel.
+-- Create 3 instances:
+1) SCHEDULED
+2) CANCELED
+3) COMPLETED
+
+-- Once these three are added feel free the browse the site. To see data you will need to create the data using the forms. How the Inventory API is set up to create a autombile for the sales and service microservices to work, complete these forms in order by click Inventory in nav bar.
+
+1) Add manufacturer
+2) Add vehicle
+3) Add vehicle to inventory
+
+You can now play around with the microservices! Enjoy :)
 
 Team:
 
