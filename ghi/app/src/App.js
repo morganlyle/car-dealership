@@ -1,21 +1,21 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import CustomerForm from './CustomerForm';
-import SalesRepForm from './SalesRepForm';
-import SaleRecordForm from './SaleRecordForm';
-import SalesList from './SalesList';
-import SalesByReps from './SalesByReps';
-import ListManufacturers from './ListManufacturers';
-import VehicleModelList from './VehicleModelList';
-import ManufacturerForm from './ManufacturerForm';
-import VehicleModelForm from './VehicleModelForm';
-import AutomobileInventory from './AutomobileInventory';
-import ServiceList from './ServiceList';
-import ServiceForm from './ServiceForm';
-import TechnicianForm from './TechnicianForm';
-import ServiceHistory from './ServiceHistory';
-import InventoryForm from './InventoryForm';
+import CustomerForm from './Sale/CustomerForm';
+import SalesRepForm from './Sale/SalesRepForm';
+import SaleRecordForm from './Sale/SaleRecordForm';
+import SalesList from './Sale/SalesList';
+import SalesByReps from './Sale/SalesByReps';
+import ListManufacturers from './Inventory/ListManufacturers';
+import VehicleModelList from './Inventory/VehicleModelList';
+import ManufacturerForm from './Inventory/ManufacturerForm';
+import VehicleModelForm from './Inventory/VehicleModelForm';
+import AutomobileInventory from './Inventory/AutomobileInventory';
+import ServiceList from './Service/ServiceList';
+import ServiceForm from './Service/ServiceForm';
+import TechnicianForm from './Service/TechnicianForm';
+import ServiceHistory from './Service/ServiceHistory';
+import InventoryForm from './Inventory/InventoryForm';
 function App({customers, cars, salesReps, salesList, manufacturers, vehichleModels, services, technician,serviceHistory, inventory}) {
   console.log(inventory)
   return (

@@ -5,7 +5,7 @@ import json
 
 from common.json import ModelEncoder
 from .models import AutomobileVO, Appointment, Status, Technician
-# Create your views here.
+
 
 class StatusEncoder(ModelEncoder):
     model = Status
@@ -15,7 +15,7 @@ class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         'vins',
-        'vip'
+        'vip',
         'id', 
     ]
     
@@ -43,21 +43,12 @@ class AppointmentEncoder(ModelEncoder):
     encoders = {'technician': TechnicianEncoder(), 
                 'status': StatusEncoder(),
                 }
-    
-    # def get_extra_data(self, o):
-    #     try:
-    #         AutomobileVO.objects.filter(vins=o.vin)
-    #         return{'vip': True}
-    #     except:
-    #         return{'vip': False}
 
-    
 @require_http_methods(['GET', 'POST'])
 def api_list_appointments(request):
     if request.method == "GET":
         status = Status.objects.get(name='SCHEDULED')
         appointments = Appointment.objects.filter(status=status)
-        print(appointments)
         return JsonResponse(
             {'appointments': appointments},
             encoder=AppointmentEncoder, safe=False
@@ -67,7 +58,6 @@ def api_list_appointments(request):
 
         try:
             AutomobileVO.objects.get(vins=content['vin'])
-            print('this car is in our vin')
             technician = Technician.objects.get(name=content['technician'])
             content['technician'] = technician
             appointment = Appointment.objects.create(**content)
@@ -77,20 +67,11 @@ def api_list_appointments(request):
             
             
         except AutomobileVO.DoesNotExist:
-            print("this is not here")
             technician = Technician.objects.get(name=content['technician'])
-            content['technician'] = technician
-            # appointment = Appointment.objects.create(**content)
-            
+            content['technician'] = technician            
             appointment = Appointment.create(**content)
-            # id = content['vin']
-            # vins = AutomobileVO.objects.get(pk=id)
-            # content['vin'] = vins
-    # except AutomobileVO.DoesNotExist:
             return JsonResponse({"appointment": appointment}, encoder=AppointmentEncoder,)
-    
-    # appointment = Appointment.objects.create(**content)
-    # return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False,)
+
 
 @require_http_methods(['GET', 'POST'])
 def api_list_technicians(request):
