@@ -9,8 +9,6 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "service_project.settings")
 django.setup()
 
-# Import models from service_rest, here.
-# from service_rest.models import Something
 from service_rest.models import AutomobileVO
 
 
@@ -24,7 +22,6 @@ def get_automobile():
 
 def poll():
     while True:
-        print('hello there')
         try:
             get_automobile()
             pass

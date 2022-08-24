@@ -9,8 +9,6 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
 django.setup()
 from sales_rest.models import AutoMobileInventoryVO
-# Import models from sales_rest, here.
-# from sales_rest.models import Something
 
 def get_automobiles():
     response = requests.get("http://inventory-api:8000/api/automobiles/")
@@ -28,10 +26,8 @@ def get_automobiles():
         )
 def poll():
     while True:
-        print('Sales poller polling for data')
         try:
             get_automobiles()
-            # Write your polling logic, here
             pass
         except Exception as e:
             print(e, file=sys.stderr)

@@ -1,10 +1,24 @@
 ![Getting started](docs/homepage.png)
 
-# CarCar
+# Lyle's Dealership
+
+# App Overview
+
+This application is ideal for a dealership that is looking to keep all of their information in a convenient database. For the Sales microservice you can add sales reps and customers. You can then see a list of the vehicles the rep has sold and the vehicle that the customer has bought. In the Services microservice, you can add technicians and request an appointment for your car. In the service list you can complete or cancel an appointment, and it also lets the technician know if the customer is a VIP via the vin number. The Inventory microservice can add a manufacturer, and from there you can create a vehicle model, and then show a list of the your complete inventory.
+
+# App Technologies
+
+- Django
+- React
+- Docker
+- RESTful API
+- Poller
+- PostgreSQL
+
+# Directions for Running Application
 
 - To spin up your Docker containers please run these commands:
 
-  - Run docker container prune -f
   - Run docker volume create beta-data
   - Run docker-compose up
 
@@ -13,9 +27,9 @@
   -Open CLI for project-beta-service-api- in docker.
 
   - RUN: python manage.py createsuperuser
-    fill out necessary info
-  - log into admin http://localhost:8080/admin
-  - click on Status on left side of admin panel.
+    Fill out necessary info
+  - Log into admin http://localhost:8080/admin
+  - Click on Status on left side of admin panel.
   - Create 3 instances:
 
     1. SCHEDULED
@@ -29,7 +43,3 @@
     6. Add vehicle to inventory
 
 You can now play around with the microservices! Enjoy :)
-
-## Design
-
-CarCar is a app with 3 microservices: Inventory, Sales and Services. The main aggregate root would be Inventory because the aggregates of Services and Sales rely on data that is stored in Inventory. Inventory and Sales are a bounded context and the aggregate root would be Inventory with Sales being the aggregate.
